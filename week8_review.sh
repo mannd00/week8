@@ -16,8 +16,8 @@ BACKUPDIR=/mnt/backups
 echo "Where would you like the backups to be put? (Defaults to /mnt/backups)"
 read BACKUPDIR
 
-BACKUPTIME=1w
-echo "How often you want backup? (Default 1w)"
+BACKUPTIME=weekly
+echo "How often you want backup? (daily, weekly, or monthly)"
 
 read BACKUPTIME
 
@@ -26,17 +26,33 @@ touch AABackup.service
 
 echo "[Unit]" >> AABackup.service
 echo "Description=Back Up Tool Service" >> AABackup.service
-echo "[Unit]" >> AABackup.service
-echo "Description=Backup" >> AABackup.service
-echo "Wants=" >> AABackup.service
+echo "Requires=media.mount" >> AABackup.service
+echo "[Service]" >> AABackup.service
+echo "Type=simple" >> AABackup.service
+echo "ExecStart=/usr/bin/rsync -avzr $MY_HOME $BACKUPDIR" >> AABackup.service
+echo "WantedBy=multi-user.target" >> AABackup.service
 
-cp AABackup.service /etc/systemd/system/
+#cp AABackup.service /etc/systemd/system/
+
+touch AABackup.timer
+
+echo "[Unit]" >> AABackup.timer
+echo "Description=Back Up Tool Timer Service" >> AABackup.timer
+echo "[Timer]" >> AABackup.timer
+echo "OnCalendar=$BACKUPTIME " >> AABackup.timer
+echo "Persistent=True" >> AABackup.timer
+echo "[Install]" >> AABackup.timer
+echo "WantedBy=timers.target" >> AABackup.timer
+
+#cp AABackup.timer /etc/systemd/system/
 
 echo "And run it!"
-systemctl start AABackup.service
+#sudo systemctl start AABackup.service
+#sudo systemctl start AABackup.timer
+#sudo systemctl enable AABackup.timer
 
 echo "Now we can check it's status"
-systemctl status AABackup.service
+#sudo systemctl status AABackup.service
 
 echo "And check all current jobs"
-systemctl list-jobs
+#sudo systemctl list-jobs
