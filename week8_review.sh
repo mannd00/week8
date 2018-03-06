@@ -9,7 +9,7 @@ echo "We will check what user's folders are in /home and craete a service to per
 ls -lh /home
 cd ~/
 MY_HOME= $HOME
-echo "Is this your home? {MY_HOME}"
+echo "Is this your home? $MY_HOME"
 
 BACKUPDIR=/mnt/backups
 
