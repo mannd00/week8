@@ -38,7 +38,7 @@ echo "Description=Back Up Tool Service" >> AABackup.service
 echo "Requires=" >> AABackup.service
 echo "[Service]" >> AABackup.service
 echo "Type=simple" >> AABackup.service
-echo "ExecStart=/usr/bin/rsync -avzr $MY_HOME $BACKUPDIR" >> AABackup.service
+#echo "ExecStart=/usr/bin/rsync -avzr $MY_HOME $BACKUPDIR" >> AABackup.service
 echo "[Install]" >> AABackup.service
 echo "WantedBy=multi-user.target" >> AABackup.service
 
