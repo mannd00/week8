@@ -1,6 +1,12 @@
 #! /bin/bash
 #
 # Data Backup script that creates a service to perform backups of /home directory 
+# In order to undo this script, please run the following commands:
+# sudo systemctl stop AABackup.service
+# sudo systemctl stop AABackup.timer
+# sudo systemctl disable AABackup.service
+# sudo systemctl disable AABackup.service
+# sudo rm /etc/systemd/system/AABackup.*
 
 echo "Hello! Welcome to the Back Up Tool Script!"
 echo "We will check what user's folders are in /home and craete a service to perform backups. \n"
