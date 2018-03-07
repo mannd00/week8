@@ -8,7 +8,7 @@
 # sudo systemctl disable AABackup.service
 # sudo rm /etc/systemd/system/AABackup.*
 
-echo "Hello! Welcome to the Back Up Tool Script!"
+echo "Hello! Welcome to the Back Up Service Tool!"
 echo "We will check what user's folders are in /home and craete a service to perform backups. \n"
 
 ## Figure out who/what/when/where
