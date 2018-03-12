@@ -29,7 +29,7 @@ read -e -p "Backup Dir: " -i "$BACKUPDIR" BACKUPDIR
 
 ### Prompt for the backup interval
 BACKUPTIME=weekly
-echo "\nHow often you want backup? (daily, weekly, or monthly)"
+echo -e "\nHow often you want backup? (daily, weekly, or monthly)"
 read -e -p "Interval: " -i "$BACKUPTIME" BACKUPTIME
 
 ### Create Service
