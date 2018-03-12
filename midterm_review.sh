@@ -17,14 +17,17 @@ ls -lh /home
 MY_HOME= $HOME
 echo "Is this your home? $MY_HOME \n"
 
+### Prompt for the source Dir
 echo "Enter home dir or dir you want backed up"
 read -p "$HOME" MY_HOME
 
 BACKUPDIR=/mnt/backups
 
+### Prompt for the Backup destination Dir
 echo "Where would you like the backups to be put? (Defaults to /mnt/backups) \n"
 read -p "$BACKUPDIR" BACKUPDIR
 
+### Prompt for the backup interval
 BACKUPTIME=weekly
 echo "How often you want backup? (daily, weekly, or monthly)"
 
@@ -42,8 +45,7 @@ echo "Type=simple" >> AABackup.service
 echo "[Install]" >> AABackup.service
 echo "WantedBy=multi-user.target" >> AABackup.service
 
-sudo cp AABackup.service /etc/systemd/system/
-
+### Create the Service Timer
 touch AABackup.timer
 
 echo "[Unit]" >> AABackup.timer
@@ -54,8 +56,11 @@ echo "Persistent=True" >> AABackup.timer
 echo "[Install]" >> AABackup.timer
 echo "WantedBy=timers.target" >> AABackup.timer
 
+### Copy the files to the systemd folder
+sudo cp AABackup.service /etc/systemd/system/
 sudo cp AABackup.timer /etc/systemd/system/
 
+### Start the service
 echo "And run it!"
 sudo systemctl start AABackup.service
 sudo systemctl start AABackup.timer
