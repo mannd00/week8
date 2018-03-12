@@ -19,19 +19,18 @@ echo -e "Is this your home? $MY_HOME \n"
 
 ### Prompt for the source Dir
 echo "Enter home dir or dir you want backed up"
-read -p "$HOME" MY_HOME
+read -e -p "Home: " -i "$HOME" MY_HOME
 
 BACKUPDIR=/mnt/backups
 
 ### Prompt for the Backup destination Dir
-echo -e "Where would you like the backups to be put? (Defaults to /mnt/backups) \n"
-read -p "$BACKUPDIR" BACKUPDIR
+echo -e "\nWhere would you like the backups to be put? (Defaults to /mnt/backups)"
+read -e -p "Backup Dir: " -i "$BACKUPDIR" BACKUPDIR
 
 ### Prompt for the backup interval
 BACKUPTIME=weekly
-echo "How often you want backup? (daily, weekly, or monthly)"
-
-read BACKUPTIME
+echo "\nHow often you want backup? (daily, weekly, or monthly)"
+read -e -p "Interval: " -i "$BACKUPTIME" BACKUPTIME
 
 ### Create Service
 touch AABackup.service
