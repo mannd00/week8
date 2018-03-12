@@ -8,14 +8,14 @@
 # sudo systemctl disable AABackup.service
 # sudo rm /etc/systemd/system/AABackup.*
 
-echo "Hello! Welcome to the Back Up Service Tool!"
-echo "We will check what user's folders are in /home and craete a service to perform backups. \n"
+echo -e "Hello! Welcome to the Back Up Service Tool!"
+echo -e "We will check what user's folders are in /home and craete a service to perform backups. \n"
 
 ## Figure out who/what/when/where
 ls -lh /home
 
 MY_HOME= $HOME
-echo "Is this your home? $MY_HOME \n"
+echo -e "Is this your home? $MY_HOME \n"
 
 ### Prompt for the source Dir
 echo "Enter home dir or dir you want backed up"
@@ -24,7 +24,7 @@ read -p "$HOME" MY_HOME
 BACKUPDIR=/mnt/backups
 
 ### Prompt for the Backup destination Dir
-echo "Where would you like the backups to be put? (Defaults to /mnt/backups) \n"
+echo -e "Where would you like the backups to be put? (Defaults to /mnt/backups) \n"
 read -p "$BACKUPDIR" BACKUPDIR
 
 ### Prompt for the backup interval
@@ -41,7 +41,7 @@ echo "Description=Back Up Tool Service" >> AABackup.service
 echo "Requires=" >> AABackup.service
 echo "[Service]" >> AABackup.service
 echo "Type=simple" >> AABackup.service
-#echo "ExecStart=/usr/bin/rsync -avzr $MY_HOME $BACKUPDIR" >> AABackup.service
+echo "ExecStart=/usr/bin/rsync -avzr $MY_HOME $BACKUPDIR" >> AABackup.service
 echo "[Install]" >> AABackup.service
 echo "WantedBy=multi-user.target" >> AABackup.service
 
